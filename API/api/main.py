@@ -23,15 +23,15 @@ def get_db():
         db.close()
 
 
-# origins = ["https://localhost:3000"]
+origins = ["https://localhost:3000"]
 
-# api.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials = True,
-#     allow_methods = ["*"],
-#     allow_headers = ["*"],
-# )
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"],
+)
 
 
 
@@ -72,8 +72,8 @@ def  create_fake_data(db: Session):
     return db_expense
 
 
-if __name__== "__main__":
-    database = SessionLocal()
-    create_fake_data(db = database)
-    print(database.query(Expense).offset(0).limit(50).all())
-    # uvicorn.run(api, port=8000, host="127.0.0.1")
+# if __name__== "__main__":
+#     database = SessionLocal()
+#     create_fake_data(db = database)
+#     print(database.query(Expense).offset(0).limit(50).all())
+#     # uvicorn.run(api, port=8000, host="127.0.0.1")
