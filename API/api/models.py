@@ -2,7 +2,9 @@ from sqlalchemy import Boolean, Column, ForeignKey, Float, String, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-from .database import base
+from sqlalchemy.sql.sqltypes import Integer
+
+from database import Base
 
 
 class User(Base):
@@ -13,15 +15,15 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default= True)
 
-    expenses = relationship("Expense", back_populates="owner")
+    # expenses = relationship("Expense", back_populates="owner")
 
 
 class Expense(Base):
-    __tablename__: "expenses"
+    __tablename__ = "expenses"
 
     id = Column(Integer, primary_key= True, index= True)
     date = Column(DateTime, default = (datetime.now))
     store = Column(String, nullable= True)
     price = Column(Float)
 
-    owner = relationship("User", back_populates="expenses")
+    # owner = relationship("User", back_populates="expenses")
