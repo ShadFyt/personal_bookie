@@ -21,3 +21,8 @@ def create_expense(db: Session, expense: ExpenseCreate):
     db.commit()
     db.refresh(db_expense)
     return db_expense
+
+def delete_expense(db: Session, expense_id: int):
+    item = db.query(Expense).filter(Expense.id == expense_id).first()
+    db.delete(item)
+    db.commit()

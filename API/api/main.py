@@ -51,13 +51,13 @@ async def show_expense(expense_id: int, db: Session = Depends(get_db)):
 async def create_expense(expense: schemas.ExpenseCreate, db: Session = Depends(get_db)):
     return crud.create_expense(db = db, expense=expense)
 
-@api.put("/expense/{expense_id}")
+@api.put("/expense/{expense_id}", response_model= schemas.Expense)
 async def update_expense(expense_id: int, expense: schemas.Expense):
     return "updated"
 
 @api.delete("/expense/{expense_id}")
-async def delate_expense(expense_id: int):
-    return f'deleted {expense_id}'
+async def delate_expense(expense_id: int, db: Session = Depends(get_db)):
+    crud.delete_expense(db, expense_id=expense_id)
 
 fake_data = {
     "store": "rona",
