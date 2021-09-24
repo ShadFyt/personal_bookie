@@ -26,3 +26,11 @@ def delete_expense(db: Session, expense_id: int):
     item = db.query(Expense).filter(Expense.id == expense_id).first()
     db.delete(item)
     db.commit()
+
+def update_expense(db: Session, expense_id: int, expense: ExpenseCreate):
+    item = db.query(Expense).filter(Expense.id == expense_id).first()
+    item.store = expense.store
+    item.date = expense.date
+    item.price = expense.price
+    db.commit()
+    db.refresh(item)
