@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from "react"
+import axios from 'axios'
+
 import {
     Box,
     Button,
@@ -13,8 +16,19 @@ import {
 } from "@chakra-ui/react"
 
 
-function ExpenseTable() {
 
+function ExpenseTable({ expenseList }) {
+
+    function ExpenseWrapper({ expense }) {
+        console.log(expense)
+        return (
+            <Tr>
+                <Th>{expense.store}</Th>
+                <Th>{expense.date}</Th>
+                <Th>{expense.price}</Th>
+            </Tr>
+        )
+    }
 
     return (
         <>
@@ -29,26 +43,7 @@ function ExpenseTable() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr>
-                            <Td>Rona</Td>
-                            <Td>10-09-2021</Td>
-                            <Td>$20</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Rona</Td>
-                            <Td>10-09-2021</Td>
-                            <Td>$20</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Rona</Td>
-                            <Td>10-09-2021</Td>
-                            <Td>$20</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Rona</Td>
-                            <Td>10-09-2021</Td>
-                            <Td>$20</Td>
-                        </Tr>
+                        {expenseList.map(expense => <ExpenseWrapper expense={expense} />)}
                     </Tbody>
                 </Table>
             </Box>
